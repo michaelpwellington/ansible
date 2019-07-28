@@ -1,5 +1,5 @@
 ---
-- hosts: ios-switches
+- hosts: 172.22.30.20
   vars:
     vlan_id: 998
     vlan_name: Ansible_VLAN
