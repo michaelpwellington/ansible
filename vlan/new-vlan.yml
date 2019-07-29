@@ -1,8 +1,8 @@
 ---
-- hosts: 192.168.123.2
+- hosts: Junos_Switch
   vars:
     vlan_id: 
-    vlan_name: Ansible_VLAN
+    vlan_name: 
 
   tasks:
     - name: Provision VLAN
