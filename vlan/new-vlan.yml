@@ -10,7 +10,13 @@
         vlan_id: "{{ vlan_id }}"
         name: "{{ vlan_name }}"
         state: present
-
+        
+    - name: Add VLAN to Trunk
+      junos_l2_interface:
+        name: ge-0/0/11
+        trunk_vlans:
+        - "{{ vlan_name }}"
+        state: present
     - name: Show VLAN
       junos_command:
         commands: show vlan
