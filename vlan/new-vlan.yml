@@ -14,7 +14,7 @@
     - name: Add VLAN to trunks
       junos_config:
         lines: 
-        - set interfaces ge-0/0/11.0 family ethernet switching vlan members "{{ vlan_name }}"
+        - set interfaces ge-0/0/11 unit 0 family ethernet-switching vlan members "{{ vlan_name }}"
         
     - name: Show VLAN
       junos_command:
