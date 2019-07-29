@@ -11,6 +11,7 @@
         name: "{{ vlan_name }}"
         state: present
         interfaces: ge-0/0/11.0
+        
     - name: Show VLAN
       junos_command:
         commands: show vlan
