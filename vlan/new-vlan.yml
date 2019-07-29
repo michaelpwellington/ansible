@@ -1,17 +1,25 @@
 ---
 - hosts: Junos_Switch
   vars:
-    vlan_id: 
-    vlan_name: 
+    lan_vlan_id: 
+    lan_vlan_name:
+    DMZ_vlan_id:
+    DMZ_vlan_name:
 
   tasks:
-    - name: Provision VLAN
+    - name: Provision LAN VLAN
       junos_vlan:
-        vlan_id: "{{ vlan_id }}"
-        name: "{{ vlan_name }}"
+        vlan_id: "{{ lan_vlan_id }}"
+        name: "{{ lan_vlan_name }}"
         state: present
         
-    - name: Add VLAN to trunks
+    - name: Provision DMZ VLAN
+      junos_vlan:
+        vlan_id: "{{ DMZ_vlan_id }}"
+        name: "{{ DMZ_vlan_name }}"
+        state: present
+        
+    - name: Add LAN VLAN to trunks
       junos_config:
         lines: 
         - set interfaces ge-0/0/9 unit 0 family ethernet-switching vlan members "{{ vlan_name }}"
