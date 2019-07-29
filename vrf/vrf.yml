@@ -1,0 +1,26 @@
+- hosts: mx_routers
+  vars:
+    vrf_name:
+
+  tasks:
+    - name: Configure vrf configuration
+      junos_vrf:
+        name: "{{ vrf_name }}"
+        interfaces:
+          - ge-1/1/9."{{ lan_vlan_id }}"
+        rd: 20878:"{{ lan_vlan_id }}"
+        target: target:20878:"{ lan_vlan_id }}"
+        state: present
+        
+    - name: Add LAN VLAN to trunks
+      junos_config:
+        lines: 
+        - set interfaces ge-0/0/9 unit 0 family ethernet-switching vlan members "{{ vlan_name }}"
+        
+    - name: Show VLAN
+      junos_command:
+        commands: show vlan
+      register: show_vlan
+
+    - debug: var=show_vlan.stdout_lines
+© 2019 GitHub, Inc.
